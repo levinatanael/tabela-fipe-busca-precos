@@ -1,0 +1,24 @@
+<div class="container my-5">
+    <h1 class="mb-3">Placas cadastradas</h1>
+    <table class="table table-hover" *ngIf="placas && placas.length > 0">
+        <thead>
+            <tr>
+                <th scope="col">Placa</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let placa of placas">
+                <th scope="row">{{ placa.codigo }}</th>
+                <td>{{ placa.valor }}</td>
+                <td>{{ placa.marca }}</td>
+                <td>{{ placa.modelo }}</td>
+                <td>{{ placa.dataConsulta }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p *ngIf="!placas || placas.length <= 0">Nenhuma placa cadastrada.</p>
+</div>

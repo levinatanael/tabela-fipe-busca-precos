@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\tabela.fipe.busca.precos.props" />
+</Project>
