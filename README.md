@@ -2,7 +2,7 @@
 
 Esta aplicação faz consulta na tabela FIPE através do site brasilapi.com.br. Com os dados retornados desta API, é possível salvar os dados da tabela FIPE vinculando a uma placa de um veículo correspondente.
 
-Você será capaz de listar estas placas cadastradas, juntamente com os dados da tabela FIPE do momento em que foram consultadas. Será possível apagar estas placas e também atualizar as suas informações.
+Você será capaz de listar estas placas cadastradas, juntamente com os dados da tabela FIPE do momento em que foram consultadas.
 
 O frontend está desenvolvido em Angular 14 e o backend em .NET Core 6.0 (Entity Framework Core, SQL Server, Migration)
 
