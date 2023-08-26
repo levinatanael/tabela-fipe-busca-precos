@@ -1,19 +1,83 @@
 <div class="container my-5">
     <h1 class="mb-3">Adicionar Nova Placa</h1>
-    <p class="mb-3">Antes de cadastrarmos uma nova placa, precisamos buscar algumas informações da tabela FIPE. Por
-        favor, preencha as informações abaixo, em seguida, clique em "Consultar FIPE".</p>
-    <form class="row row-cols-lg-auto g-3 align-items-center" #consultaPlaca="ngForm" (ngSubmit)="onSubmit()">
-        <div class="col-12">
-            <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="formData.codigo"
-                placeholder="Código FIPE do Veículo" required>
-        </div>
-        <div class="col-12">
-            <input type="number" class="form-control" id="ano" name="ano" [(ngModel)]="formData.ano"
-                placeholder="Ano do Veículo. Ex: 2018" onKeyPress="if(this.value.length==4) return false;" required
-                min="1900">
-        </div>
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Consultar FIPE</button>
-        </div>
-    </form>
+    <div *ngIf="!dadosPlaca">
+        <p class="mb-3">Antes de cadastrarmos uma nova placa, precisamos buscar algumas informações da tabela FIPE. Por
+            favor, preencha as informações abaixo, em seguida, clique em "Consultar FIPE".</p>
+        <form class="row row-cols-lg-auto g-3 align-items-center" #consultaPlaca="ngForm" (ngSubmit)="onSubmit()">
+            <div class="col-12">
+                <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="formData.codigo"
+                    placeholder="Código FIPE do Veículo" required>
+            </div>
+            <div class="col-12">
+                <input type="number" class="form-control" id="ano" name="ano" [(ngModel)]="formData.ano"
+                    placeholder="Ano do Veículo. Ex: 2018" onKeyPress="if(this.value.length==4) return false;" required
+                    min="1900">
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Consultar FIPE</button>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="dadosPlaca" class="container my-3">
+        <p class="mb-3">Confirme as informações, preencha a placa e clique em "Salvar" para gravar os dados.</p>
+        <form class="row row-cols-lg-auto g-3 align-items-center" #dadosFipe="ngForm" (ngSubmit)="onSubmitFipe()">
+            <div class="mb-3">
+                <label class="form-label">Valor:</label>
+                <input type="email" class="form-control" placeholder="{{ dadosPlaca.valor }}" disabled>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Marca:</label>
+                <input type="email" class="form-control" placeholder="{{ dadosPlaca.marca }}" disabled>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Modelo:</label>
+                <input type="email" class="form-control" placeholder="{{ dadosPlaca.modelo }}" disabled>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Ano modelo:</label>
+                <input type="email" class="form-control" placeholder="{{ dadosPlaca.anoModelo }}" disabled>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Combustível:</label>
+                <input type="email" class="form-control" placeholder="{{ dadosPlaca.combustivel }}" disabled>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Código FIPE:</label>
+                <input type="email" class="form-control" placeholder="{{ dadosPlaca.codigoFipe }}" disabled>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Mês referência:</label>
+                <input type="email" class="form-control" placeholder="{{ dadosPlaca.mesReferencia }}" disabled>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Tipo de veículo:</label>
+                <input type="email" class="form-control" placeholder="{{ dadosPlaca.tipoVeiculo }}" disabled>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Sigla combustível:</label>
+                <input type="email" class="form-control" placeholder="{{ dadosPlaca.siglaCombustivel }}" disabled>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Data da consulta:</label>
+                <input type="email" class="form-control" placeholder="{{ dadosPlaca.dataConsulta }}" disabled>
+            </div>
+            <div class="col-12">
+                <input type="text" class="form-control text-uppercase" id="placa" name="placa"
+                    [(ngModel)]="formData.placa" placeholder="Placa do Veículo" maxlength="7" required>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button class="btn btn-link me-md-2" type="button" (click)="cancelar()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="dadosNaoEncontrado" class="container my-3 alert alert-danger" role="alert">
+        Nenhum modelo encontrado com estes dados na tabela FIPE. Tente novamente!
+    </div>
+    <div *ngIf="camposNaoPreenchidos" class="container my-3 alert alert-danger" role="alert">
+        Preencha os campos corretamente!
+    </div>
+    <div *ngIf="placaNaoPreenchida" class="container my-3 alert alert-danger" role="alert">
+        Preencha a placa corretamente!
+    </div>
 </div>

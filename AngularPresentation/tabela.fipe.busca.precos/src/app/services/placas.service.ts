@@ -25,4 +25,8 @@ export class PlacasService {
   consultar(codigo: string, ano: number): Observable<Placa> {
     return this.http.get<Placa>(this.baseApiUrl + 'consultar/' + codigo + '/' + ano);
   }
+
+  add(addPlacaRequest: Placa): Observable<Placa> {
+    return this.http.post<Placa>(this.baseApiUrl, addPlacaRequest);
+  }
 }

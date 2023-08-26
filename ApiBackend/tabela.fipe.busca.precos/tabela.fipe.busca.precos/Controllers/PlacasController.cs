@@ -22,27 +22,48 @@ namespace tabela.fipe.busca.precos.Controllers
         [HttpGet]
         public async Task<IActionResult> ListarTodasPlacas()
         {
-            var placas = await _tabelaFipeDbContext.Placas.ToListAsync();
+            try
+            {
+                var placas = await _tabelaFipeDbContext.Placas.ToListAsync();
 
-            return Ok(placas);
+                return Ok(placas);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("consultar/{codigo}/{ano}")]
         public IActionResult ConsultarPlaca(string codigo, int ano)
         {
-            var placa = _fipeService.ConsultaPreco(codigo, ano);
+            try
+            {
+                var placa = _fipeService.ConsultaPreco(codigo, ano);
 
-            return Ok(placa);
+                return Ok(placa);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> AdicionarPlaca([FromBody] Placa placaRequest)
         {
-            placaRequest.Id = Guid.NewGuid();
-            await _tabelaFipeDbContext.Placas.AddAsync(placaRequest);
-            await _tabelaFipeDbContext.SaveChangesAsync();
+            try
+            {
+                placaRequest.Id = Guid.NewGuid();
+                await _tabelaFipeDbContext.Placas.AddAsync(placaRequest);
+                await _tabelaFipeDbContext.SaveChangesAsync();
 
-            return Ok(placaRequest);
+                return Ok(placaRequest);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

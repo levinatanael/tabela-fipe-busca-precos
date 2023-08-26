@@ -4,28 +4,32 @@ using tabela.fipe.busca.precos.Models;
 
 namespace tabela.fipe.busca.precos.Services
 {
-    public class FipeService: IFipeService
+    public class FipeService : IFipeService
     {
         private readonly string _apiFipe;
         public FipeService(IConfiguration configuration) => _apiFipe = configuration["EndPointApiFipe:Precos"];
 
         public Placa? ConsultaPreco(string codigo, int ano)
         {
-            var listaPlacas = new List<Placa>();
+            Placa? placa = null;
 
             var client = new RestClient(string.Concat(_apiFipe, codigo));
             var request = new RestRequest();
             var response = client.Execute(request);
 
-            var content = response.Content;
-            dynamic json = JsonConvert.DeserializeObject(content);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var content = response.Content;
+                dynamic json = JsonConvert.DeserializeObject(content);
 
-            listaPlacas = json.ToObject<List<Placa>>();
+                var listaPlacas = json.ToObject<List<Placa>>();
 
-            return ConstultaPorAno(listaPlacas, ano);
+                placa = ConstultaPorAno(listaPlacas, codigo, ano);
+            }
+            return placa;
         }
 
-        private static Placa? ConstultaPorAno(List<Placa> listaPlacas, int ano)
+        private static Placa? ConstultaPorAno(List<Placa> listaPlacas, string codigo, int ano)
         {
             Placa? placa = null;
             if (listaPlacas.Any())
