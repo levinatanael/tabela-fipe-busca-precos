@@ -35,7 +35,7 @@ namespace tabela.fipe.busca.precos.Controllers
         }
 
         [HttpGet("consultar/{codigo}/{ano}")]
-        public IActionResult ConsultarPlaca(string codigo, int ano)
+        public IActionResult ConsultarPreco(string codigo, int ano)
         {
             try
             {
@@ -49,12 +49,35 @@ namespace tabela.fipe.busca.precos.Controllers
             }
         }
 
+        [HttpGet("consultarplaca/{placa}")]
+        public async Task<IActionResult> ConsultarPlaca(string placa)
+        {
+            try
+            {
+                var placas = await _tabelaFipeDbContext.Placas
+                    .Where(p => p.Codigo.Equals(placa)).ToListAsync();
+
+                Placa? placaEncontrada = null;
+                if (placas.Any())
+                {
+                    placaEncontrada = placas.FirstOrDefault();
+                }
+
+                return Ok(placaEncontrada);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> AdicionarPlaca([FromBody] Placa placaRequest)
         {
             try
             {
                 placaRequest.Id = Guid.NewGuid();
+                placaRequest.Codigo = placaRequest.Codigo.ToUpper();
                 await _tabelaFipeDbContext.Placas.AddAsync(placaRequest);
                 await _tabelaFipeDbContext.SaveChangesAsync();
 
