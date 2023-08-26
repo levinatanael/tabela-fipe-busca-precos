@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using tabela.fipe.busca.precos.Data;
 using tabela.fipe.busca.precos.Models;
+using tabela.fipe.busca.precos.Services;
 
 namespace tabela.fipe.busca.precos.Controllers
 {
@@ -10,17 +11,28 @@ namespace tabela.fipe.busca.precos.Controllers
     public class PlacasController : Controller
     {
         private readonly TabelaFipeDbContext _tabelaFipeDbContext;
+        private readonly IFipeService _fipeService;
 
-        public PlacasController(TabelaFipeDbContext tabelaFipeDbContext) {
+        public PlacasController(TabelaFipeDbContext tabelaFipeDbContext, IFipeService fipeService)
+        {
             _tabelaFipeDbContext = tabelaFipeDbContext;
+            _fipeService = fipeService;
         }
 
-        [HttpGet]        
+        [HttpGet]
         public async Task<IActionResult> ListarTodasPlacas()
         {
             var placas = await _tabelaFipeDbContext.Placas.ToListAsync();
 
             return Ok(placas);
+        }
+
+        [HttpGet("consultar/{codigo}/{ano}")]
+        public IActionResult ConsultarPlaca(string codigo, int ano)
+        {
+            var placa = _fipeService.ConsultaPreco(codigo, ano);
+
+            return Ok(placa);
         }
 
         [HttpPost]

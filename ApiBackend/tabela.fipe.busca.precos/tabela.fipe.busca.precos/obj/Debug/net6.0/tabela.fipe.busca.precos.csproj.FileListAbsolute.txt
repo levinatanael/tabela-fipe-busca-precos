@@ -85,3 +85,5 @@ C:\GIT\tabela-fipe-busca-precos\ApiBackend\tabela.fipe.busca.precos\tabela.fipe.
 C:\GIT\tabela-fipe-busca-precos\ApiBackend\tabela.fipe.busca.precos\tabela.fipe.busca.precos\obj\Debug\net6.0\tabela.fipe.busca.precos.pdb
 C:\GIT\tabela-fipe-busca-precos\ApiBackend\tabela.fipe.busca.precos\tabela.fipe.busca.precos\obj\Debug\net6.0\tabela.fipe.busca.precos.genruntimeconfig.cache
 C:\GIT\tabela-fipe-busca-precos\ApiBackend\tabela.fipe.busca.precos\tabela.fipe.busca.precos\obj\Debug\net6.0\ref\tabela.fipe.busca.precos.dll
+C:\GIT\tabela-fipe-busca-precos\ApiBackend\tabela.fipe.busca.precos\tabela.fipe.busca.precos\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\GIT\tabela-fipe-busca-precos\ApiBackend\tabela.fipe.busca.precos\tabela.fipe.busca.precos\bin\Debug\net6.0\RestSharp.dll

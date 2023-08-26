@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using tabela.fipe.busca.precos.Data;
+using tabela.fipe.busca.precos.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddSwaggerGen();
 //Injeção de dependência
 builder.Services.AddDbContext<TabelaFipeDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TabelaFipeConnectionString")));
+builder.Services.AddScoped<IFipeService, FipeService>();
 
 var app = builder.Build();
 

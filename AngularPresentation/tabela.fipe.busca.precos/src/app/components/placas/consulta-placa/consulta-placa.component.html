@@ -1,0 +1,19 @@
+<div class="container my-5">
+    <h1 class="mb-3">Adicionar Nova Placa</h1>
+    <p class="mb-3">Antes de cadastrarmos uma nova placa, precisamos buscar algumas informações da tabela FIPE. Por
+        favor, preencha as informações abaixo, em seguida, clique em "Consultar FIPE".</p>
+    <form class="row row-cols-lg-auto g-3 align-items-center" #consultaPlaca="ngForm" (ngSubmit)="onSubmit()">
+        <div class="col-12">
+            <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="formData.codigo"
+                placeholder="Código FIPE do Veículo" required>
+        </div>
+        <div class="col-12">
+            <input type="number" class="form-control" id="ano" name="ano" [(ngModel)]="formData.ano"
+                placeholder="Ano do Veículo. Ex: 2018" onKeyPress="if(this.value.length==4) return false;" required
+                min="1900">
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Consultar FIPE</button>
+        </div>
+    </form>
+</div>
