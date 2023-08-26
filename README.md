@@ -1,4 +1,4 @@
-# Tabela FIPE - Busca preços (em desenvolvimento ...)
+# Tabela FIPE - Busca preços
 
 Esta aplicação faz consulta na tabela FIPE através do site brasilapi.com.br. Com os dados retornados desta API, é possível salvar os dados da tabela FIPE vinculando a uma placa de um veículo correspondente.
 
